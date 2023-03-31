@@ -60,4 +60,8 @@ export default {
   bottom: 0;
   border-radius: 0 0 10px 10px;
 }
+
+/** {*/
+/*  outline: solid 1px red;*/
+/*}*/
 </style>
