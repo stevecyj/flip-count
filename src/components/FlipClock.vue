@@ -61,6 +61,57 @@ export default {
   border-radius: 0 0 10px 10px;
 }
 
+/*牌上的數字*/
+.flip .number0:before,
+.flip .number0:after {
+  content: "0";
+}
+
+.flip .number1:before,
+.flip .number1:after {
+  content: "1";
+}
+
+.flip .number2:before,
+.flip .number2:after {
+  content: "2";
+}
+
+.flip .number3:before,
+.flip .number3:after {
+  content: "3";
+}
+
+.flip .number4:before,
+.flip .number4:after {
+  content: "4";
+}
+
+.flip .number5:before,
+.flip .number5:after {
+  content: "5";
+}
+
+.flip .number6:before,
+.flip .number6:after {
+  content: "6";
+}
+
+.flip .number7:before,
+.flip .number7:after {
+  content: "7";
+}
+
+.flip .number8:before,
+.flip .number8:after {
+  content: "8";
+}
+
+.flip .number9:before,
+.flip .number9:after {
+  content: "9";
+}
+
 /** {*/
 /*  outline: solid 1px red;*/
 /*}*/
