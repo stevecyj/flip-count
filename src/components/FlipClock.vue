@@ -59,6 +59,7 @@ export default {
   top: 50%;
   bottom: 0;
   border-radius: 0 0 10px 10px;
+  line-height: 0; /*把上下數字接在一起*/
 }
 
 /*牌上的數字*/
@@ -110,6 +111,22 @@ export default {
 .flip .number9:before,
 .flip .number9:after {
   content: "9";
+}
+
+/*向下翻*/
+.flip.down .front:before {
+  z-index: 3;
+}
+
+.flip.down .back:after {
+  z-index: 2;
+  transform-origin: 50% 0;
+  transform: perspective(160px) rotateX(180deg);
+}
+
+.flip.down .front:after,
+.flip.down .back:before {
+  z-index: 1;
 }
 
 /** {*/
