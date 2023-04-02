@@ -32,6 +32,7 @@ export default {
   computed: {},
   methods: {
     flipDown() {
+      this.flipType = 'down';
       if (this.isFlipping) {
         return false;
       }
@@ -42,10 +43,21 @@ export default {
       setTimeout(() => {
         this.isFlipping = false;
         this.frontText = this.backText;
-
       }, 600);
     },
     flipUp() {
+      this.flipType = 'up';
+      if (this.isFlipping) {
+        return false;
+      }
+
+      this.backText = this.frontText <= 0 ? 9 : this.frontText - 1;
+      this.isFlipping = true;
+
+      setTimeout(() => {
+        this.isFlipping = false;
+        this.frontText = this.backText;
+      }, 600);
     },
     classNumber(number) {
       return `number${number}`;
@@ -166,7 +178,23 @@ export default {
   z-index: 1;
 }
 
-/*旋轉效果*/
+/*向上翻*/
+.flip.up .front:after {
+  z-index: 3;
+}
+
+.flip.up .back:before {
+  z-index: 2;
+  transform-origin: 50% 100%;
+  transform: perspective(160px) rotateX(-180deg);
+}
+
+.flip.up .front:before,
+.flip.up .back:after {
+  z-index: 1;
+}
+
+/*向下旋轉效果*/
 .flip.down.go .front:before {
   transform-origin: 50% 100%;
   animation: frontFlipDown 0.6s ease-in-out both;
@@ -198,7 +226,36 @@ export default {
   }
 }
 
-/** {*/
-/*  outline: solid 1px red;*/
-/*}*/
+/*向上旋轉效果*/
+.flip.up.go .front:after {
+  transform-origin: 50% 0;
+  animation: frontFlipUp 0.6s ease-in-out both;
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.3);
+  backface-visibility: hidden;
+}
+
+.flip.up.go .back:before {
+  animation: backFlipUp 0.6s ease-in-out both;
+}
+
+@keyframes frontFlipUp {
+  0% {
+    transform: perspective(160px) rotateX(0deg);
+  }
+
+  100% {
+    transform: perspective(160px) rotateX(180deg);
+  }
+}
+
+@keyframes backFlipUp {
+  0% {
+    transform: perspective(160px) rotateX(-180deg);
+  }
+
+  100% {
+    transform: perspective(160px) rotateX(0deg);
+  }
+}
+
 </style>
