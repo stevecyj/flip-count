@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FlipClock msg="Welcome to Your Vue.js App" />
+    <FlipClock msg="Flip Count"/>
   </div>
 </template>
 
