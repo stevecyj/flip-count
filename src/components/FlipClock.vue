@@ -1,19 +1,56 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <div class="flip down">
-      <div class="digital front number0"></div>
-      <div class="digital back number1"></div>
+    <div class="flip" :class="[flipType,{'go':isFlipping}]">
+      <div class="digital front " :class="classNumber(frontText)"></div>
+      <div class="digital back " :class="classNumber(backText)"></div>
+    </div>
+    <div class="btn-con">
+      <button id="btn1" @click="flipDown">向下翻+1</button>
+      <button id="btn2" @click="flipUp">向上翻-1</button>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "FlipClock",
   props: {
     msg: String,
   },
+  data() {
+    return {
+      isFlipping: false,
+      flipType: 'down',
+      count: 0,
+      frontText: 0,
+      backText: 1,
+      duration: 600
+    };
+  },
+  computed: {},
+  methods: {
+    flipDown() {
+      if (this.isFlipping) {
+        return false;
+      }
+
+      this.backText = this.frontText >= 9 ? 0 : this.frontText + 1;
+      this.isFlipping = true;
+
+      setTimeout(() => {
+        this.isFlipping = false;
+        this.frontText = this.backText;
+
+      }, 600);
+    },
+    flipUp() {
+    },
+    classNumber(number) {
+      return `number${number}`;
+    }
+  }
 };
 </script>
 
@@ -127,6 +164,38 @@ export default {
 .flip.down .front:after,
 .flip.down .back:before {
   z-index: 1;
+}
+
+/*旋轉效果*/
+.flip.down.go .front:before {
+  transform-origin: 50% 100%;
+  animation: frontFlipDown 0.6s ease-in-out both;
+  box-shadow: 0 -2px 6px rgba(255, 255, 255, 0.3);
+  backface-visibility: hidden;
+}
+
+.flip.down.go .back:after {
+  animation: backFlipDown 0.6s ease-in-out both;
+}
+
+@keyframes frontFlipDown {
+  0% {
+    transform: perspective(160px) rotateX(0deg);
+  }
+
+  100% {
+    transform: perspective(160px) rotateX(-180deg);
+  }
+}
+
+@keyframes backFlipDown {
+  0% {
+    transform: perspective(160px) rotateX(180deg);
+  }
+
+  100% {
+    transform: perspective(160px) rotateX(0deg);
+  }
 }
 
 /** {*/
